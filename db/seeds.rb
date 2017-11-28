@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Question.destroy_all
+Answer.destroy_all
+User.destroy_all
+
+admin = User.create!(email: "admin@admin.com", password: "password", password_confirmation: "password", admin: true)
+
+40.times do
+  question =  Question.create!(title: Faker::Hipster.sentence(3, true), body: Faker::Seinfeld.quote, net_vote: Faker::Number.between(1, 10) )
+  3.times do
+    question.answers.create!(body: Faker::RickAndMorty.quote, net_vote: Faker::Number.between(1, 10))
+  end
+end
