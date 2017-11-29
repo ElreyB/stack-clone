@@ -9,7 +9,11 @@ Question.destroy_all
 Answer.destroy_all
 User.destroy_all
 
-admin = User.create!(email: "admin@admin.com", password: "password", password_confirmation: "password", admin: true)
+admin = User.create!(username: "Admin", email: "admin@admin.com", password: "password", password_confirmation: "password", admin: true)
+
+10.times do |email|
+  user = User.create!(username: Faker::Simpsons.character, email: Faker::Internet.email, password: "password", password_confirmation: "password")
+end
 
 40.times do
   question =  Question.create!(title: Faker::Hipster.sentence(3, true), body: Faker::Seinfeld.quote, net_vote: Faker::Number.between(1, 10) )
@@ -17,3 +21,7 @@ admin = User.create!(email: "admin@admin.com", password: "password", password_co
     question.answers.create!(body: Faker::RickAndMorty.quote, net_vote: Faker::Number.between(1, 10))
   end
 end
+
+p "Create #{Question.count} questions."
+p "Create #{Answer.count} answers."
+p "Create #{User.count} users."
